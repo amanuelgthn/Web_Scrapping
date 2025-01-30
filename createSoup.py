@@ -7,4 +7,4 @@ response.raise_for_status()
 noStarchSoup = bs4.BeautifulSoup(response.text)
 print(type(noStarchSoup))
 
-# print(noStarchSoup)
+print(noStarchSoup)

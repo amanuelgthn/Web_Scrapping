@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+from collections import defaultdict
+from http import client
+
+from cssselect import Selector
+
+
 def parse_search_results(selector: Selector):
     """parse search results from google search page"""
     results = []

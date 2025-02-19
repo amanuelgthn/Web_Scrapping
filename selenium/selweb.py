@@ -7,183 +7,155 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import re
-from pandas import DataFrame, ExcelWriter  # Import pandas for saving the results in Excel
-from sys import argv
+import pandas as pd
+import requests
+from requests.exceptions import RequestException
 
-# List of US states
-us_states = [
-    "Alabama", "Alaska", "Arizona", "Arkansas", "California", 
-    "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", 
-    "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", 
-    "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", 
-    "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", 
-    "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", 
-    "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", 
-    "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", 
-    "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", 
-    "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
+# Precompile regex patterns for efficiency
+PHONE_REGEX = re.compile(r'([0-9\+\-\(\) ]{8,})')
+EMAIL_REGEX = re.compile(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}')
+LINKEDIN_REGEX = re.compile(r'https?://(?:www\.)?linkedin\.com/[^\s"\']+')
+
+# List of Belgium cities
+belgium_cities = [
+    "Brussels", "Antwerp", "Ghent", "Charleroi", "Liège", "Bruges", "Namur",
+    "Leuven", "Mons", "Aalst", "Mechelen", "Ostend", "Tournai", "Hasselt",
+    "Sint-Niklaas", "Dendermonde", "Roeselare", "Kortrijk", "Genk", "Seraing",
+    "Turnhout", "Herstal", "Virton", "Verviers", "Maaseik", "Waremme", "Andenne",
+    "Thuin", "Enghien", "Bergen", "Sint-Truiden", "Diksmuide", "Blankenberge",
+    "La Louvière"
 ]
 
-us_states = us_states[::-1]
-print("US States:", us_states)
-
-# Set up Chrome options (and proxy if needed)
+# Configure Chrome options for headless and efficiency
 chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("--headless=new")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--no-sandbox")
+prefs = {'profile.default_content_setting_values': {'images': 2}}
+chrome_options.add_experimental_option('prefs', prefs)
+
 service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=chrome_options)
 
-# Uncomment and update these lines if you wish to use a proxy.
-# proxy = 'http://51.158.68.133:8811'
-# options = {
-#     'proxy': {
-#         'http': proxy,
-#         'https': proxy,
-#         'no_proxy': 'localhost,127.0.0.1'
-#     }
-# }
-
-# Initialize the driver once outside the loop
-driver = webdriver.Chrome(
-    service=service, 
-    options=chrome_options,
-    # seleniumwire_options=options
-)
+# Headers for requests to mimic a real browser
+REQUEST_HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+}
 
 def scroll_feed(driver):
     """Scrolls the feed until no new results are loaded."""
-    scrollable_div = driver.find_element(By.CSS_SELECTOR, 'div[role="feed"]')
-    last_height = driver.execute_script("return arguments[0].scrollHeight;", scrollable_div)
-    while True:
+    scrollable_div = WebDriverWait(driver, 20).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, 'div[role="feed"]'))
+    )
+    items_selector = 'div[role="feed"] > div > div[jsaction]'
+    previous_count = len(driver.find_elements(By.CSS_SELECTOR, items_selector))
+    attempts = 0
+    max_attempts = 5  # Adjust based on testing
+
+    while attempts < max_attempts:
         driver.execute_script("arguments[0].scrollBy(0, 1000);", scrollable_div)
-        time.sleep(2)  # Wait for new results to load
-        new_height = driver.execute_script("return arguments[0].scrollHeight;", scrollable_div)
-        if new_height == last_height:
-            break
-        last_height = new_height
+        time.sleep(1)  # Reduced sleep time
+        current_count = len(driver.find_elements(By.CSS_SELECTOR, items_selector))
+        if current_count > previous_count:
+            previous_count = current_count
+            attempts = 0
+        else:
+            attempts += 1
 
-# Create an Excel writer object that will write all state sheets to one file.
-with ExcelWriter('resultsusa.xlsx', engine='openpyxl') as writer:
-    # Loop through each state
-    for state in us_states:
+def extract_contact_info(url):
+    """Extracts email and LinkedIn using requests."""
+    try:
+        response = requests.get(url, headers=REQUEST_HEADERS, timeout=10)
+        if response.status_code == 200:
+            page_source = response.text
+            emails = EMAIL_REGEX.findall(page_source)
+            linkedin_urls = LINKEDIN_REGEX.findall(page_source)
+            return (emails[0] if emails else None,
+                    linkedin_urls[0] if linkedin_urls else None)
+    except RequestException as e:
+        print(f"Request error for {url}: {e}")
+    return (None, None)
+
+# List to collect all data
+all_data = []
+
+for city in belgium_cities:
+    try:
+        keyword = f"ecommerce {city}"
+        driver.get(f'https://www.google.com/maps/search/{keyword}/')
+
+        # Close initial popup if present
         try:
-            # Create the search keyword (e.g., "ecommerce California")
-            keyword = "ecommerce " + state
-            driver.get(f'https://www.google.com/maps/search/{keyword}/')
+            WebDriverWait(driver, 3).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, "form:nth-child(2)"))
+            ).click()
+        except Exception:
+            pass
 
-            # Attempt to close any initial popup if it appears
+        scroll_feed(driver)
+
+        items = driver.find_elements(By.CSS_SELECTOR, 'div[role="feed"] > div > div[jsaction]')
+        for item in items:
+            data = {'City': city}
+
+            # Extract title and link
             try:
-                WebDriverWait(driver, 5).until(
-                    EC.element_to_be_clickable((By.CSS_SELECTOR, "form:nth-child(2)"))
-                ).click()
+                data['title'] = item.find_element(By.CSS_SELECTOR, ".fontHeadlineSmall").text
+                data['link'] = item.find_element(By.CSS_SELECTOR, "a").get_attribute('href')
             except Exception:
-                pass
+                continue  # Skip if no title
 
-            # Wait for the feed container to load
-            scrollable_div = WebDriverWait(driver, 20).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, 'div[role="feed"]'))
-            )
+            # Extract website
+            try:
+                data['website'] = item.find_element(By.CSS_SELECTOR, 'div[role="feed"] > div > div[jsaction] div > a').get_attribute('href')
+            except Exception:
+                data['website'] = None
 
-            # Scroll through the feed to load more items
-            scroll_feed(driver)
+            # Extract rating and reviews
+            try:
+                rating_text = item.find_element(By.CSS_SELECTOR, '.fontBodyMedium > span[role="img"]').get_attribute('aria-label')
+                numbers = [float(piece.replace(",", ".")) for piece in rating_text.split() 
+                         if piece.replace(",", ".").replace(".", "", 1).isdigit()]
+                data['stars'] = numbers[0] if numbers else None
+                data['reviews'] = int(numbers[1]) if len(numbers) > 1 else None
+            except Exception:
+                data['stars'] = data['reviews'] = None
 
-            # Extract the individual listing items
-            items = driver.find_elements(By.CSS_SELECTOR, 'div[role="feed"] > div > div[jsaction]')
-            results = []
+            # Extract phone number
+            try:
+                text_content = item.text
+                phone_match = PHONE_REGEX.search(text_content)
+                data['phone'] = phone_match.group(0) if phone_match else None
+            except Exception:
+                data['phone'] = None
 
-            for item in items:
-                data = {}
+            # Extract email and LinkedIn
+            data['email'], data['linkedin'] = extract_contact_info(data['website']) if data['website'] else (None, None)
 
-                # Extract basic details
-                try:
-                    data['title'] = item.find_element(By.CSS_SELECTOR, ".fontHeadlineSmall").text
-                except Exception:
-                    data['title'] = None
+            # Append cleaned data
+            all_data.append({
+                'Company Name': data['title'],
+                'Contact Name': '',
+                'Email': data['email'],
+                'Job Position': '',
+                'Mobile': data['phone'],
+                'Website': data['website'],
+                'LinkedIn': data['linkedin'],
+                'City': city
+            })
 
-                try:
-                    data['link'] = item.find_element(By.CSS_SELECTOR, "a").get_attribute('href')
-                except Exception:
-                    data['link'] = None
+        print(f"Processed {city} with {len(items)} entries.")
 
-                try:
-                    data['website'] = item.find_element(By.CSS_SELECTOR, 'div[role="feed"] > div > div[jsaction] div > a').get_attribute('href')
-                except Exception:
-                    data['website'] = None
+    except Exception as e:
+        print(f"Error processing {city}: {e}")
 
-                try:
-                    rating_text = item.find_element(By.CSS_SELECTOR, '.fontBodyMedium > span[role="img"]').get_attribute('aria-label')
-                    # Example: "4.7 star rating · 123 reviews"
-                    rating_numbers = [float(piece.replace(",", ".")) for piece in rating_text.split(" ") 
-                                      if piece.replace(",", ".").replace(".", "", 1).isdigit()]
-                    if rating_numbers:
-                        data['stars'] = rating_numbers[0]
-                        data['reviews'] = int(rating_numbers[1]) if len(rating_numbers) > 1 else 0
-                except Exception:
-                    data['stars'] = None
-                    data['reviews'] = None
+# Save all data to Excel
+if all_data:
+    df = pd.DataFrame(all_data)
+    with pd.ExcelWriter('resultsbelgium.xlsx') as writer:
+        df.to_excel(writer, index=False, sheet_name='All Cities')
+    print("Data saved to 'resultsbelgium.xlsx'.")
+else:
+    print("No data collected.")
 
-                try:
-                    text_content = item.text
-                    phone_pattern = r'([0-9\+\-\(\) ]{8,})'
-                    matches = re.findall(phone_pattern, text_content)
-                    phone_numbers = list(set(matches))
-                    data['phone'] = phone_numbers[0] if phone_numbers else None
-                except Exception:
-                    data['phone'] = None
-
-                # Extract email and LinkedIn from the business website if available.
-                # Instead of cancelling the whole search on error, we catch exceptions here
-                if data.get('website'):
-                    current_tab = driver.current_window_handle
-                    # Open a new tab to load the website
-                    driver.execute_script("window.open('');")
-                    new_tab = [handle for handle in driver.window_handles if handle != current_tab][0]
-                    driver.switch_to.window(new_tab)
-                    try:
-                        # Set a page load timeout (adjust as needed)
-                        driver.set_page_load_timeout(60)
-                        driver.get(data['website'])
-                        time.sleep(5)  # Wait for the website to load; adjust as necessary.
-                        page_source = driver.page_source
-
-                        # Use regex to search for an email address
-                        emails = re.findall(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}', page_source)
-                        data['email'] = emails[0] if emails else None
-
-                        # Use regex to search for a LinkedIn URL
-                        linkedin_urls = re.findall(r'https?://(?:www\.)?linkedin\.com/[^\s"\']+', page_source)
-                        data['linkedin'] = linkedin_urls[0] if linkedin_urls else None
-
-                    except Exception as e:
-                        # Instead of cancelling the entire process, log the error and set fields to None
-                        print(f"Error extracting email/LinkedIn from website for state {state}: {e}")
-                        data['email'] = None
-                        data['linkedin'] = None
-                    finally:
-                        try:
-                            driver.close()  # Close the new tab
-                        except Exception as close_e:
-                            print(f"Error closing tab: {close_e}")
-                        driver.switch_to.window(current_tab)
-                else:
-                    data['email'] = None
-                    data['linkedin'] = None
-
-                if data.get('title'):
-                    results.append(data)
-
-            # Create a DataFrame for this state's results and write it to its own sheet.
-            df = DataFrame(results)
-            # Excel sheet names are limited to 31 characters. We use the state name (or a trimmed version).
-            sheet_name = state[:31]
-            df.to_excel(writer, sheet_name=sheet_name, index=False)
-            print(f"Results for {state} written to sheet '{sheet_name}'.")
-            # Clear results for the next state
-            results.clear()
-
-        except Exception as state_err:
-            print(f"Error processing state {state}: {state_err}")
-
-# The Excel file with all sheets is automatically saved when exiting the 'with' block.
-
-# Finally, close the driver
 driver.quit()
-print("All states processed and Excel file 'resultsusa.xlsx' has been created successfully!")

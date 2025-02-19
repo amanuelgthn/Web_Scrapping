@@ -1,0 +1,573 @@
+germany_cities = [
+    "Berlin", "Hamburg", "Munich", "Cologne", "Frankfurt", "Stuttgart",
+    "Düsseldorf", "Leipzig", "Dortmund", "Essen", "Bremen", "Dresden",
+    "Hanover", "Nuremberg", "Duisburg", "Bochum", "Wuppertal", "Bielefeld",
+    "Bonn", "Münster", "Karlsruhe", "Mannheim", "Augsburg", "Wiesbaden",
+    "Gelsenkirchen", "Mönchengladbach", "Braunschweig", "Chemnitz", "Kiel",
+    "Aachen", "Halle", "Magdeburg", "Freiburg", "Krefeld", "Lübeck",
+    "Oberhausen", "Erfurt", "Mainz", "Rostock", "Kassel", "Hagen", "Saarbrücken",
+    "Hamm", "Potsdam", "Ludwigshafen", "Oldenburg", "Osnabrück", "Leverkusen",
+    "Solingen", "Herne", "Neuss", "Heidelberg", "Darmstadt", "Regensburg",
+    "Ingolstadt", "Würzburg", "Fürth", "Ulm", "Heilbronn", "Paderborn",
+    "Göttingen", "Offenbach", "Recklinghausen", "Bottrop", "Bremerhaven",
+    "Reutlingen", "Wolfsburg", "Erlangen", "Trier", "Remscheid", "Siegen",
+    "Salzgitter", "Hildesheim", "Moers", "Koblenz", "Bergisch Gladbach",
+    "Zwickau", "Jena", "Iserlohn", "Gütersloh", "Marl", "Lünen", "Herford",
+    "Ratingen", "Velbert", "Esslingen", "Konstanz", "Schwerin", "Cottbus",
+    "Brandenburg", "Stralsund", "Greifswald", "Wismar", "Flensburg"
+]
+
+us_cities = [
+    "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia",
+    "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville",
+    "Fort Worth", "Columbus", "Charlotte", "San Francisco", "Indianapolis",
+    "Seattle", "Denver", "Washington", "Boston", "El Paso", "Nashville",
+    "Detroit", "Oklahoma City", "Portland", "Las Vegas", "Memphis", "Louisville",
+    "Baltimore", "Milwaukee", "Albuquerque", "Tucson", "Fresno", "Sacramento",
+    "Kansas City", "Long Beach", "Mesa", "Atlanta", "Colorado Springs", "Miami",
+    "Raleigh", "Omaha", "Oakland", "Minneapolis", "Tulsa", "Cleveland", "Wichita",
+    "Arlington", "New Orleans", "Bakersfield", "Tampa", "Honolulu", "Anaheim",
+    "Aurora", "Santa Ana", "St. Louis", "Riverside", "Corpus Christi", "Pittsburgh",
+    "Lexington", "Anchorage", "Stockton", "Cincinnati", "St. Paul", "Toledo",
+    "Greensboro", "Newark", "Plano", "Henderson", "Lincoln", "Buffalo", "Jersey City",
+    "Chula Vista", "Fort Wayne", "Orlando", "St. Petersburg", "Chandler", "Laredo",
+    "Norfolk", "Durham", "Madison", "Lubbock", "Winston-Salem", "Garland", "Glendale",
+    "Hialeah", "Reno", "Baton Rouge", "Irvine", "Chesapeake", "Irving", "Scottsdale",
+    "North Las Vegas", "Fremont", "Gilbert", "San Bernardino", "Boise", "Birmingham"
+]
+
+uk_cities = [
+    "London", "Birmingham", "Manchester", "Leeds", "Glasgow", "Liverpool",
+    "Bristol", "Sheffield", "Edinburgh", "Leicester", "Coventry", "Cardiff",
+    "Bradford", "Belfast", "Nottingham", "Kingston upon Hull", "Newcastle upon Tyne",
+    "Stoke-on-Trent", "Southampton", "Brighton", "Derby", "Plymouth", "Wolverhampton",
+    "Dundee", "Aberdeen", "Norwich", "Swansea", "Milton Keynes", "Luton", "Portsmouth",
+    "Sunderland", "York", "Peterborough", "Bournemouth", "Huddersfield", "Oxford",
+    "Reading", "Blackpool", "Bolton", "Ipswich", "Middlesbrough", "Exeter", "Colchester",
+    "Chelmsford", "Gloucester", "Worcester", "Preston", "Chester", "Hereford", "Lincoln",
+    "Cambridge", "Carlisle", "Inverness", "Perth", "Derry", "Bangor", "Truro", "Canterbury",
+    "Winchester", "Durham", "Stirling", "Salisbury", "Chichester", "Wakefield", "Doncaster",
+    "Halifax", "Rotherham", "Bath", "Eastbourne", "Southend-on-Sea", "Warrington"
+]
+
+japan_cities = [
+    "Tokyo", "Yokohama", "Osaka", "Nagoya", "Sapporo", "Kobe", "Kyoto", "Fukuoka",
+    "Sendai", "Hiroshima", "Kitakyushu", "Chiba", "Saitama", "Shizuoka", "Kawasaki",
+    "Niigata", "Hamamatsu", "Okayama", "Sakai", "Kumamoto", "Kagoshima", "Toyama",
+    "Nara", "Takamatsu", "Matsuyama", "Asahikawa", "Fukushima", "Mito", "Utsunomiya",
+    "Maebashi", "Kofu", "Nagano", "Gifu", "Otsu", "Hachinohe", "Akita", "Yamagata",
+    "Kanazawa", "Fukui", "Tottori", "Matsue", "Hirakata", "Amagasaki", "Neyagawa",
+    "Suita", "Kishiwada", "Takarazuka", "Ashiya", "Nishinomiya", "Ibaraki", "Tsu",
+    "Kochi", "Miyazaki", "Saga", "Oita", "Kumamoto", "Nagasaki", "Beppu", "Himeji",
+    "Kurashiki", "Takasaki", "Toyota", "Ichinomiya", "Okinawa"
+]
+
+india_cities = [
+    "Mumbai", "Delhi", "Bangalore", "Hyderabad", "Ahmedabad", "Chennai", "Kolkata",
+    "Surat", "Pune", "Jaipur", "Lucknow", "Kanpur", "Nagpur", "Visakhapatnam", "Indore",
+    "Thane", "Bhopal", "Patna", "Vadodara", "Ghaziabad", "Ludhiana", "Agra", "Nashik",
+    "Faridabad", "Meerut", "Rajkot", "Varanasi", "Srinagar", "Dhanbad", "Amritsar",
+    "Allahabad", "Ranchi", "Coimbatore", "Jabalpur", "Gwalior", "Vijayawada", "Jodhpur",
+    "Madurai", "Raipur", "Kota", "Guwahati", "Chandigarh", "Solapur", "Hubli", "Mysore",
+    "Bareilly", "Aligarh", "Moradabad", "Gurgaon", "Bhubaneswar", "Dehradun", "Mangalore",
+    "Patiala", "Bikaner", "Ajmer", "Cuttack", "Amravati", "Tiruchirappalli", "Kurnool",
+    "Bhilai", "Warangal", "Bhatpara", "Namakkal", "Thrissur", "Nellore", "Kollam",
+    "Kakinada", "Durgapur", "Bardhaman", "Asansol", "Bhavnagar", "Jamshedpur", "Gorakhpur",
+    "Siliguri", "Tiruppur", "Kharagpur", "Ambala", "Noida", "Greater Noida", "Gandhinagar"
+]
+
+france_cities = [
+    "Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Strasbourg", "Montpellier",
+    "Bordeaux", "Lille", "Rennes", "Reims", "Le Havre", "Saint-Étienne", "Toulon",
+    "Grenoble", "Dijon", "Angers", "Nîmes", "Villeurbanne", "Le Mans", "Aix-en-Provence",
+    "Clermont-Ferrand", "Brest", "Limoges", "Tours", "Amiens", "Metz", "Besançon", "Perpignan",
+    "Orléans", "Mulhouse", "Rouen", "Caen", "Nancy", "Avignon", "Boulogne-Billancourt",
+    "Saint-Denis", "Argenteuil", "Montreuil", "Saint-Paul", "Roubaix", "Tourcoing",
+    "Nanterre", "Vitry-sur-Seine", "Créteil", "Dunkerque", "Poitiers", "Calais", "Quimper",
+    "Bayonne", "Cherbourg", "Béziers", "Valence", "Annecy", "Saint-Malo", "Niort", "La Rochelle",
+    "Auxerre", "Chambéry", "Évry", "Massy", "Pau", "Aubagne", "Colmar", "Vannes", "Cannes",
+    "Antibes", "Pessac", "Saint-Nazaire", "Mérignac", "Rueil-Malmaison", "Saint-Herblain",
+    "Troyes", "Issy-les-Moulineaux", "Noisy-le-Grand", "Cergy", "Versailles", "Drancy",
+    "Aulnay-sous-Bois", "Courbevoie", "Saint-Quentin", "Vénissieux", "La Seyne-sur-Mer",
+    "Martigues", "Melun", "Roanne", "Chalon-sur-Saône", "Tarbes", "Sète", "Châteauroux",
+    "Blois", "Albi", "Bourg-en-Bresse", "Gap", "Briançon", "Albertville", "Chartres",
+    "Évreux", "Nevers", "Arles", "Aurillac", "Bastia", "Brive-la-Gaillarde", "Carcassonne",
+    "Dieppe", "Foix", "Laon", "Lorient", "Montauban", "Nîmes", "Périgueux", "Privas",
+    "Rodez", "Saint-Brieuc", "Tours", "Vichy"
+]
+
+
+
+brazil_cities = [
+    "São Paulo", "Rio de Janeiro", "Salvador", "Brasília", "Fortaleza",
+    "Belo Horizonte", "Manaus", "Curitiba", "Recife", "Porto Alegre",
+    "Belém", "Goiânia", "Guarulhos", "Campinas", "São Luís", "Maceió",
+    "Duque de Caxias", "Natal", "Teresina", "Campo Grande", "Santo André",
+    "João Pessoa", "Jaboatão dos Guararapes", "São Bernardo do Campo",
+    "Osasco", "Contagem", "Ribeirão Preto", "Uberlândia", "Sorocaba",
+    "Niterói", "Cuiabá", "Juiz de Fora", "Aracaju", "São José dos Campos",
+    "Londrina", "Joinville", "Belford Roxo", "Santos", "Ananindeua",
+    "Nova Iguaçu", "São Gonçalo", "Feira de Santana", "Piracicaba",
+    "Cariacica", "Maringá", "Montes Claros", "Diadema", "Petrolina",
+    "Vitória da Conquista", "Campos dos Goytacazes", "Foz do Iguaçu",
+    "Mauá", "Itaquaquecetuba", "Franca", "São Vicente", "Marília",
+    "Barueri", "Carapicuíba", "Volta Redonda", "Praia Grande", "Betim",
+    "São José do Rio Preto", "Caxias do Sul", "Pelotas", "Blumenau",
+    "Taubaté", "Santa Maria", "Olinda", "Canoas", "Florianópolis"
+]
+
+canada_cities = [
+    "Toronto", "Montreal", "Vancouver", "Calgary", "Edmonton", "Ottawa",
+    "Winnipeg", "Quebec City", "Hamilton", "Kitchener", "London", "Victoria",
+    "Halifax", "Oshawa", "Windsor", "Saskatoon", "Regina", "St. John's",
+    "Kelowna", "Barrie", "Sherbrooke", "Kingston", "Sudbury", "Lethbridge",
+    "Moncton", "Thunder Bay", "Nanaimo", "Red Deer", "Kamloops", "Prince George",
+    "Chilliwack", "Abbotsford", "Langley", "Richmond", "Burnaby", "Coquitlam",
+    "Delta", "North Vancouver", "West Vancouver", "New Westminster", "Port Coquitlam",
+    "Port Moody", "White Rock", "Maple Ridge", "Mission", "Kelowna", "Nelson",
+    "Trail", "Cranbrook", "Medicine Hat", "Grande Prairie", "Fort McMurray",
+    "Yellowknife", "Whitehorse", "Iqaluit"
+]
+
+australia_cities = [
+    "Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Gold Coast",
+    "Canberra", "Newcastle", "Wollongong", "Geelong", "Hobart", "Townsville",
+    "Cairns", "Darwin", "Toowoomba", "Ballarat", "Bendigo", "Albury", "Launceston",
+    "Mackay", "Rockhampton", "Bundaberg", "Wagga Wagga", "Coffs Harbour", "Tamworth",
+    "Hervey Bay", "Mildura", "Shepparton", "Geraldton", "Dubbo", "Traralgon",
+    "Mount Gambier", "Alice Springs", "Kalgoorlie", "Bunbury", "Port Macquarie",
+    "Orange", "Nowra", "Warrnambool", "Devonport", "Broome", "Katherine", "Gladstone",
+    "Whyalla", "Port Augusta", "Burnie", "Esperance", "Gympie", "Maryborough",
+    "Sunshine Coast", "Central Coast", "Mornington Peninsula", "Yarra Valley"
+]
+
+south_korea_cities = [
+    "Seoul", "Busan", "Incheon", "Daegu", "Daejeon", "Gwangju", "Ulsan",
+    "Suwon", "Changwon", "Seongnam", "Goyang", "Yongin", "Bucheon", "Ansan",
+    "Jeonju", "Cheongju", "Namyangju", "Hwaseong", "Anyang", "Cheonan",
+    "Nonsan", "Gimhae", "Pohang", "Chuncheon", "Gyeongju", "Jinju", "Asan",
+    "Yangsan", "Gimpo", "Iksan", "Guri", "Paju", "Uiwang", "Gangneung",
+    "Miryang", "Namhae", "Geoje", "Sokcho", "Andong", "Suncheon", "Muan",
+    "Yeongju", "Gunpo", "Siheung", "Pocheon", "Icheon", "Hampyeong", "Hwasun",
+    "Gochang", "Haenam", "Gurye", "Jangseong", "Gangjin", "Wando", "Goheung",
+    "Jindo", "Sinan", "Boseong", "Hamyang", "Sancheong", "Hadong", "Namwon",
+    "Imsil", "Gochang", "Buan", "Jeongeup", "Gunsan", "Naju", "Hampyeong"
+]
+
+russia_cities = [
+    "Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg", "Kazan",
+    "Nizhny Novgorod", "Chelyabinsk", "Samara", "Omsk", "Rostov-on-Don",
+    "Ufa", "Krasnoyarsk", "Voronezh", "Perm", "Volgograd", "Krasnodar",
+    "Saratov", "Tyumen", "Tolyatti", "Izhevsk", "Barnaul", "Ulyanovsk",
+    "Irkutsk", "Khabarovsk", "Yaroslavl", "Vladivostok", "Makhachkala",
+    "Tomsk", "Orenburg", "Kemerovo", "Novokuznetsk", "Ryazan", "Astrakhan",
+    "Penza", "Lipetsk", "Kirov", "Cheboksary", "Tula", "Kaliningrad",
+    "Balashikha", "Kursk", "Stavropol", "Sochi", "Ulan-Ude", "Tver",
+    "Magnitogorsk", "Kurgan", "Arkhangelsk", "Vladimir", "Naberezhnye Chelny",
+    "Pskov", "Smolensk", "Murmansk", "Kamensk-Uralsky", "Kostroma", "Taganrog",
+    "Sterlitamak", "Bryansk", "Nizhnevartovsk", "Blagoveshchensk", "Veliky Novgorod",
+    "Komsomolsk-on-Amur", "Yoshkar-Ola", "Surgut", "Nalchik", "Syktyvkar",
+    "Nizhnekamsk", "Angarsk", "Yakutsk", "Podolsk", "Mytishchi", "Balakovo",
+    "Armavir", "Engels", "Volzhsky", "Khimki", "Lyubertsy", "Korolev", "Elektrostal"
+]
+
+italy_cities = [
+    "Rome", "Milan", "Naples", "Turin", "Palermo", "Genoa", "Bologna",
+    "Florence", "Bari", "Catania", "Venice", "Verona", "Messina", "Padua",
+    "Trieste", "Taranto", "Brescia", "Parma", "Prato", "Modena", "Reggio Calabria",
+    "Reggio Emilia", "Perugia", "Livorno", "Ravenna", "Cagliari", "Foggia",
+    "Rimini", "Salerno", "Ferrara", "Sassari", "Latina", "Giugliano in Campania",
+    "Monza", "Bergamo", "Trento", "Vicenza", "Terni", "Forlì", "Novara",
+    "Pescara", "Caserta", "Arezzo", "Como", "Lecce", "Alessandria", "Barletta",
+    "Pisa", "Teramo", "Brindisi", "Asti", "Viterbo", "Frosinone", "Andria",
+    "Avellino", "Belluno", "Carbonia", "Crotone", "Enna", "Iglesias", "Imperia",
+    "Massa", "Matera", "Olbia", "Oristano", "Pesaro", "Pistoia", "Potenza",
+    "Rieti", "Siena", "Siracusa", "Trapani", "Vibo Valentia", "Vercelli"
+]
+
+spain_cities = [
+    "Madrid", "Barcelona", "Valencia", "Seville", "Zaragoza", "Málaga",
+    "Murcia", "Palma", "Las Palmas", "Bilbao", "Alicante", "Córdoba", "Valladolid",
+    "Vigo", "Gijón", "L'Hospitalet de Llobregat", "A Coruña", "Granada", "Vitoria-Gasteiz",
+    "Elche", "Oviedo", "Santa Cruz de Tenerife", "Badalona", "Cartagena", "Terrassa",
+    "Jerez de la Frontera", "Sabadell", "Móstoles", "Alcalá de Henares", "Pamplona",
+    "Fuenlabrada", "Almería", "Leganés", "San Sebastián", "Santander", "Castellón de la Plana",
+    "Burgos", "Albacete", "Alcorcón", "Getafe", "Salamanca", "Logroño", "Badajoz",
+    "Tarragona", "Lleida", "Marbella", "Mataró", "Santa Coloma de Gramenet", "Algeciras",
+    "Dos Hermanas", "Santiago de Compostela", "Torrevieja", "Granollers", "Pontevedra",
+    "Benidorm", "Roquetas de Mar", "Vilanova i la Geltrú", "Reus", "Ciudad Real",
+    "Jaén", "Ourense", "Molina de Segura", "Manresa", "Cádiz", "León", "Cáceres",
+    "Talavera de la Reina", "Torremolinos", "Ávila", "Segovia", "Cuenca", "Melilla",
+    "Ceuta", "Palencia", "Soria", "Guadalajara", "Huesca", "Lugo", "Teruel"
+]
+
+
+
+mexico_cities = [
+    "Mexico City", "Ecatepec", "Guadalajara", "Puebla", "Ciudad Juárez",
+    "Tijuana", "León", "Zapopan", "Monterrey", "Mexicali", "Culiacán",
+    "Acapulco", "Chihuahua", "Mérida", "San Luis Potosí", "Querétaro",
+    "Toluca", "Hermosillo", "Saltillo", "Morelia", "Durango", "Aguascalientes",
+    "Veracruz", "Cuernavaca", "Tampico", "Torreón", "Reynosa", "Villahermosa",
+    "Oaxaca", "Tuxtla Gutiérrez", "Cancún", "La Paz", "Campeche", "Colima",
+    "Chetumal", "Ciudad Guayana", "Ciudad Obregón", "Ensenada", "Irapuato",
+    "Matamoros", "Nuevo Laredo", "Poza Rica", "Puerto Vallarta", "San Nicolás de los Garza",
+    "Tepic", "Uruapan", "Valle de Chalco", "Xalapa", "Zacatecas"
+]
+
+indonesia_cities = [
+    "Jakarta", "Surabaya", "Bandung", "Medan", "Semarang", "Palembang",
+    "Tangerang", "Depok", "South Tangerang", "Bekasi", "Makassar", "Batam",
+    "Pekanbaru", "Bandar Lampung", "Malang", "Padang", "Denpasar", "Samarinda",
+    "Banjarmasin", "Pontianak", "Manado", "Yogyakarta", "Serang", "Cimahi",
+    "Balikpapan", "Jambi", "Sukabumi", "Cirebon", "Ambon", "Palu", "Kupang",
+    "Jayapura", "Gorontalo", "Tegal", "Bogor", "Tasikmalaya", "Pati", "Magelang",
+    "Blitar", "Probolinggo", "Pasuruan", "Madiun", "Lhokseumawe", "Binjai",
+    "Pematangsiantar", "Tanjungpinang", "Banda Aceh", "Langsa", "Subulussalam",
+    "Meulaboh", "Sigli", "Sabang", "Dumai", "Pariaman", "Payakumbuh", "Bukittinggi",
+    "Padang Panjang", "Solok", "Sawahlunto", "Bengkulu", "Jember", "Kediri"
+]
+
+netherlands_cities = [
+    "Amsterdam", "Rotterdam", "The Hague", "Utrecht", "Eindhoven", "Tilburg",
+    "Groningen", "Almere", "Breda", "Nijmegen", "Apeldoorn", "Haarlem", "Enschede",
+    "Arnhem", "Zaanstad", "Amersfoort", "Haarlemmermeer", "Zoetermeer", "Emmen",
+    "Maastricht", "Dordrecht", "Leiden", "Heerlen", "Alkmaar", "Venlo", "Helmond",
+    "Leeuwarden", "Roosendaal", "Deventer", "Sittard-Geleen", "Assen", "Zwolle",
+    "Vlaardingen", "Hoofddorp", "Capelle aan den IJssel", "Spijkenisse", "Purmerend",
+    "Rijswijk", "Schiedam", "Terneuzen", "Delft", "Delfzijl", "Hilversum", "IJsselstein",
+    "Oss", "Weert", "Heerenveen", "Veenendaal", "Zandvoort", "Wageningen", "Gouda",
+    "Drachten", "Barneveld", "Bergen op Zoom", "Abcoude", "Amstelveen", "Bussum",
+    "Diemen", "Lelystad", "Nieuwegein", "Papendrecht", "Soest", "Voorburg", "Woerden"
+]
+
+turkey_cities = [
+    "Istanbul", "Ankara", "Izmir", "Bursa", "Antalya", "Adana", "Konya", "Kayseri",
+    "Mersin", "Diyarbakır", "Gaziantep", "Şanlıurfa", "Erzurum", "Van", "Trabzon",
+    "Eskişehir", "Düzce", "Kocaeli", "Samsun", "Denizli", "Batman", "Elazığ", "Siirt",
+    "Muğla", "Manisa", "Aydın", "Çanakkale", "Edirne", "Tekirdağ", "Balıkesir", "Afyonkarahisar",
+    "Kütahya", "Bolu", "Yozgat", "Kırşehir", "Niğde", "Aksaray", "Karaman", "Osmaniye",
+    "Kırklareli", "Artvin", "Rize", "Giresun", "Ordu", "Amasya", "Tokat", "Sivas",
+    "Malatya", "Kars", "Ağrı", "Iğdır", "Hakkâri", "Şırnak", "Bitlis", "Tunceli",
+    "Muş", "Nevşehir", "Zonguldak", "Karabük", "Kastamonu", "Sinop", "Bartın", "Çankırı",
+    "Bilecik", "Hakkâri", "Isparta", "Burdur", "Antakya", "Hatay", "Mardin", "Nusaybin"
+]
+
+saudi_arabia_cities = [
+    "Riyadh", "Jeddah", "Mecca", "Medina", "Dammam", "Ta'if", "Tabuk", "Buraidah",
+    "Khobar", "Najran", "Hail", "Al-Ahsa", "Jubail", "Abha", "Qatif", "Yanbu",
+    "Khamis Mushait", "Arar", "Sakakah", "Dhahran", "Qurayyat", "Ras Tanura", "Skaka",
+    "Unaizah", "Jizan", "Najran", "Al-Kharj", "Hafr Al-Batin", "Bisha", "Qurayyat",
+    "Turaif", "Sharurah", "Dubai", "Rafha", "Al-Qunfudhah", "Al-Mubarraz", "Al-Wajh",
+    "Al-Ula", "Al-Dawadmi", "Al-Rass", "Al-Ghat", "Al-Zulfi", "Al-Hofuf", "Al-Jouf",
+    "Al-Qatif", "Al-Qaysumah", "Al-Sulayyil", "Al-Thughba", "Al-Wadiah", "Al-Yamama",
+    "Asir", "Bahra", "Badr", "Batha", "Duba", "Faisaliah", "Gurayat", "Hafar Al-Batin"
+]
+
+sweden_cities = [
+    "Stockholm", "Gothenburg", "Malmö", "Uppsala", "Västerås", "Örebro", "Linköping",
+    "Helsingborg", "Jönköping", "Norrköping", "Lund", "Umeå", "Gävle", "Borås",
+    "Södertälje", "Eskilstuna", "Karlstad", "Trollhättan", "Visby", "Kristianstad",
+    "Kalmar", "Skövde", "Växjö", "Halmstad", "Luleå", "Östersund", "Karlskrona",
+    "Sandviken", "Sundsvall", "Nyköping", "Falun", "Varberg", "Trelleborg", "Ängelholm",
+    "Ystad", "Kiruna", "Piteå", "Skellefteå", "Haparanda", "Kramfors", "Sala", "Katrineholm",
+    "Haninge", "Huddinge", "Tyresö", "Botkyrka", "Nacka", "Sollentuna", "Solna", "Upplands Väsby"
+]
+
+switzerland_cities = [
+    "Zürich", "Geneva", "Basel", "Bern", "Lausanne", "Lucerne", "St. Gallen",
+    "Winterthur", "Lugano", "Biel/Bienne", "Thun", "Köniz", "La Chaux-de-Fonds",
+    "Schaffhausen", "Fribourg", "Neuchâtel", "Vernier", "Uster", "Sion", "Liestal",
+    "Baden", "Olten", "Zug", "Emmen", "Frauenfeld", "Dübendorf", "Rapperswil-Jona",
+    "Altstätten", "Herisau", "Wil", "Wettingen", "Regensdorf", "Adliswil", "Opfikon",
+    "Muttenz", "Kloten", "Montreux", "Grenchen", "Aarau", "Wädenswil", "Brugg", "Zofingen",
+    "Chur", "Rüti", "Amriswil", "Yverdon-les-Bains", "Bulle", "Morges", "Renens", "Kreuzlingen"
+]
+
+norway_cities = [
+    "Oslo", "Bergen", "Trondheim", "Stavanger", "Drammen", "Fredrikstad", "Porsgrunn",
+    "Kristiansand", "Ålesund", "Tromsø", "Sandnes", "Bodø", "Skien", "Ålborg", "Haugesund",
+    "Molde", "Larvik", "Hamar", "Lillehammer", "Askøy", "Steinkjer", "Harstad", "Narvik",
+    "Jessheim", "Ålesund", "Moss", "Sarpsborg", "Arendal", "Horten", "Kongsberg", "Tønsberg",
+    "Florø", "Vadsø", "Sortland", "Vardø", "Kautokeino", "Karasjok", "Leirvik", "Fauske",
+    "Mosjøen", "Mo i Rana", "Røros", "Volda", "Odda", "Finnsnes", "Leknes", "Longyearbyen"
+]
+
+denmark_cities = [
+    "Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg", "Randers", "Kolding",
+    "Horsens", "Vejle", "Roskilde", "Herning", "Silkeborg", "Næstved", "Fredericia",
+    "Holstebro", "Slagelse", "Hillerød", "Holbæk", "Sønderborg", "Hjørring", "Viborg",
+    "Køge", "Tårnby", "Greve", "Hørsholm", "Nyborg", "Ringsted", "Ikast", "Lemvig",
+    "Struer", "Thisted", "Mariager", "Billund", "Svendborg", "Nordborg", "Kalundborg",
+    "Dragør", "Farum", "Frederikssund", "Solrød Strand", "Haderslev", "Ribe", "Skive",
+    "Varde", "Favrskov", "Jammerbugt", "Lolland", "Middelfart", "Norddjurs", "Ringkøbing"
+]
+
+finland_cities = [
+    "Helsinki", "Espoo", "Tampere", "Vantaa", "Turku", "Oulu", "Lahti", "Kuopio",
+    "Jyväskylä", "Pori", "Joensuu", "Lappeenranta", "Hämeenlinna", "Vaasa", "Rovaniemi",
+    "Seinäjoki", "Mikkeli", "Porvoo", "Kotka", "Hyvinkää", "Nurmijärvi", "Lohja", "Rauma",
+    "Kokkola", "Kouvola", "Tuusula", "Kirkkonummi", "Kerava", "Salo", "Riihimäki", "Iisalmi",
+    "Hamina", "Forssa", "Ylöjärvi", "Kaarina", "Vihti", "Lieksa", "Nokia", "Kajaani",
+    "Savonlinna", "Kokemäki", "Karkkila", "Imatra", "Lapua", "Anjalankoski", "Pieksämäki",
+    "Äänekoski", "Hollola", "Kemi", "Kokkola", "Raseborg", "Lempäälä", "Siilinjärvi"
+]
+
+austria_cities = [
+    "Vienna", "Graz", "Linz", "Salzburg", "Innsbruck", "Klagenfurt", "Villach",
+    "Wels", "Sankt Pölten", "Dornbirn", "Wiener Neustadt", "Steyr", "Feldkirch",
+    "Bregenz", "Leoben", "Klosterneuburg", "Baden bei Wien", "Wolfsberg", "Traun",
+    "Krems an der Donau", "Leonding", "Amstetten", "Kapfenberg", "Mistelbach", "Bludenz",
+    "Schwechat", "Braunau am Inn", "Modling", "Korneuburg", "Tulln an der Donau",
+    "Hallein", "Waidhofen an der Ybbs", "Spittal an der Drau", "Radstadt", "Zell am See",
+    "Knittelfeld", "Judenburg", "Gmunden", "Schärding", "Hohenems", "Imst", "Lienz",
+    "Wels-Land", "Feldkirchen in Kärnten", "Voitsberg", "Schwarzach im Pongau"
+]
+
+singapore_cities = [
+    "Singapore", "Woodlands", "Bedok", "Tampines", "Jurong East", "Serangoon",
+    "Bukit Batok", "Punggol", "Ang Mo Kio", "Choa Chu Kang", "Pasir Ris", "Toa Payoh",
+    "Queenstown", "Clementi", "Hougang", "Bishan", "Sembawang", "Sengkang", "Yishun",
+    "Bukit Merah", "Bukit Panjang", "Marine Parade", "Novena", "Outram Park", "River Valley",
+    "Tanglin", "Kallang", "Geylang", "Little India", "Chinatown", "Sentosa", "East Coast",
+    "West Coast", "Boon Lay", "Seletar", "Lim Chu Kang", "Tuas", "Pioneer", "Kent Ridge",
+    "Mount Faber", "Telok Blangah", "Bukit Timah", "One-North", "MacPherson", "City Hall"
+]
+
+malaysia_cities = [
+    "Kuala Lumpur", "George Town", "Ipoh", "Shah Alam", "Petaling Jaya", "Johor Bahru",
+    "Kota Kinabalu", "Kuching", "Kuantan", "Melaka", "Kota Bharu", "Alor Setar", "Seremban",
+    "Kangar", "Kuala Terengganu", "Putrajaya", "Cyberjaya", "Subang Jaya", "Iskandar Puteri",
+    "Klang", "Ampang", "Rawang", "Sepang", "Nilai", "Batu Pahat", "Kluang", "Muar", "Segamat",
+    "Kulim", "Sungai Petani", "Taiping", "Kuala Kangsar", "Teluk Intan", "Parit Buntar",
+    "Bukit Mertajam", "Butterworth", "Seberang Perai", "Nibong Tebal", "Batu Ferringhi",
+    "Bayan Lepas", "Penang Hill", "Langkawi", "Kemaman", "Dungun", "Kerteh", "Miri",
+    "Sibu", "Bintulu", "Limbang", "Lawas", "Tawau", "Sandakan", "Lahad Datu", "Keningau"
+]
+
+thailand_cities = [
+    "Bangkok", "Chiang Mai", "Pattaya", "Phuket", "Krabi", "Hatyai", "Surat Thani",
+    "Nakhon Ratchasima", "Chonburi", "Nonthaburi", "Samut Prakan", "Songkhla", "Nakhon Pathom",
+    "Udon Thani", "Khon Kaen", "Rayong", "Chiang Rai", "Ayutthaya", "Lampang", "Ubon Ratchathani",
+    "Trang", "Phitsanulok", "Nakhon Si Thammarat", "Prachuap Khiri Khan", "Saraburi", "Ratchaburi",
+    "Lopburi", "Nakhon Sawan", "Phetchaburi", "Chachoengsao", "Suphan Buri", "Kanchanaburi",
+    "Chainat", "Singburi", "Ang Thong", "Sakon Nakhon", "Kalasin", "Maha Sarakham", "Narathiwat",
+    "Pattani", "Yala", "Satun", "Trat", "Ranong", "Mae Hong Son", "Nan", "Phayao", "Tak",
+    "Phetchabun", "Sa Kaeo", "Loei", "Mukdahan", "Bueng Kan", "Nong Khai", "Nong Bua Lamphu"
+]
+
+philippines_cities = [
+    "Manila", "Quezon City", "Makati", "Pasig", "Taguig", "Cebu City", "Davao City",
+    "Zamboanga City", "Baguio", "Iloilo City", "Angeles City", "Cagayan de Oro", "General Santos",
+    "Parañaque", "Las Piñas", "Caloocan", "Mandaluyong", "Muntinlupa", "Marikina", "Pasay",
+    "Valenzuela", "Antipolo", "Bacolod", "Batangas City", "Cabanatuan", "Dagupan", "Dasmariñas",
+    "Iligan", "Lapu-Lapu", "Malolos", "Naga", "Ormoc", "Olongapo", "Puerto Princesa", "San Jose del Monte",
+    "San Pablo", "Santa Rosa", "Tacloban", "Tarlac City", "Zamboanga Sibugay", "Bacoor", "Biñan",
+    "Cainta", "Cavite City", "Digos", "Dumaguete", "Gapan", "Gingoog", "Imus", "Kidapawan",
+    "Legazpi", "Lipa", "Lucena", "Maasin", "Malabon", "Navotas", "Pagadian", "Panabo", "San Fernando"
+]
+
+south_africa_cities = [
+    "Johannesburg", "Cape Town", "Durban", "Pretoria", "Port Elizabeth", "Bloemfontein",
+    "Centurion", "Polokwane", "Nelspruit", "Pietermaritzburg", "Kimberley", "Welkom",
+    "East London", "Benoni", "Vereeniging", "Springs", "Carletonville", "Soweto", "Middelburg",
+    "George", "Potchefstroom", "Rustenburg", "Uitenhage", "Klerksdorp", "Richards Bay",
+    "Witbank", "Secunda", "Newcastle", "Worcester", "Upington", "Mafikeng", "Brits", "Alberton",
+    "Boksburg", "Krugersdorp", "Randfontein", "Roodepoort", "Vanderbijlpark", "Sasolburg",
+    "Standerton", "Volksrust", "Bethlehem", "Harrismith", "Ladybrand", "Margate", "Mossel Bay",
+    "Oudtshoorn", "Parys", "Plettenberg Bay", "Queenstown", "Stellenbosch", "Swakopmund",
+    "Tzaneen", "Vryheid", "Witzenberg", "Zeerust"
+]
+
+nigeria_cities = [
+    "Lagos", "Abuja", "Kano", "Ibadan", "Port Harcourt", "Benin City", "Maiduguri",
+    "Zaria", "Jos", "Ilọrin", "Ogbomosho", "Abeokuta", "Onitsha", "Enugu", "Akure",
+    "Warri", "Calabar", "Sokoto", "Minna", "Bauchi", "Kaduna", "Makurdi", "Owerri",
+    "Auchi", "Ado Ekiti", "Asaba", "Effurun", "Gombe", "Jimeta", "Katsina", "Oyo",
+    "Saki", "Yola", "Ikare", "Ilesa", "Ilorin", "Jalingo", "Keffi", "Lafia", "Lokoja",
+    "Offa", "Okene", "Osogbo", "Saki", "Umuahia", "Uyo", "Wukari", "Yenagoa", "Zaria"
+]
+
+israel_cities = [
+    "Jerusalem", "Tel Aviv", "Haifa", "Rishon LeZion", "Petah Tikva", "Ashdod",
+    "Netanya", "Beersheba", "Holon", "Bnei Brak", "Ramat Gan", "Herzliya", "Kfar Saba",
+    "Hadera", "Modi'in-Maccabim-Re'ut", "Nazareth", "Acre", "Eilat", "Bet Shemesh",
+    "Rehovot", "Bat Yam", "Ashkelon", "Kiryat Gat", "Kiryat Motzkin", "Kiryat Yam",
+    "Kiryat Ono", "Kiryat Bialik", "Kiryat Shmona", "Lod", "Nahariya", "Ofakim", "Or Akiva",
+    "Or Yehuda", "Qalansawe", "Rahat", "Ramla", "Safed", "Sderot", "Tiberias", "Yavne",
+    "Yehud-Monosson", "Zefat", "Dimona", "Migdal HaEmek", "Ness Ziona", "Tira", "Umm al-Fahm"
+]
+
+poland_cities = [
+    "Warsaw", "Kraków", "Łódź", "Wrocław", "Poznań", "Gdańsk", "Szczecin", "Bydgoszcz",
+    "Lublin", "Katowice", "Białystok", "Gdynia", "Częstochowa", "Radom", "Sosnowiec",
+    "Toruń", "Kielce", "Gliwice", "Zabrze", "Bytom", "Olsztyn", "Rzeszów", "Ruda Śląska",
+    "Rybnik", "Tychy", "Dąbrowa Górnicza", "Opole", "Elbląg", "Wałbrzych", "Włocławek",
+    "Tarnów", "Chorzów", "Koszalin", "Kalisz", "Grudziądz", "Płock", "Zielona Góra",
+    "Legnica", "Starachowice", "Konin", "Jaworzno", "Nowy Sącz", "Słupsk", "Jastrzębie-Zdrój"
+]
+
+czech_republic_cities = [
+    "Prague", "Brno", "Ostrava", "Plzeň", "Liberec", "Olomouc", "Ústí nad Labem",
+    "České Budějovice", "Hradec Králové", "Pardubice", "Zlín", "Havířov", "Kladno",
+    "Most", "Opava", "Frýdek-Místek", "Karviná", "Jihlava", "Teplice", "Děčín", "Chomutov",
+    "Karlovy Vary", "Třinec", "Litvínov", "Mladá Boleslav", "Beroun", "Příbram", "Jablonec nad Nisou",
+    "Český Těšín", "Pelhřimov", "Prostějov", "Uherské Hradiště", "Blansko", "Břeclav", "Cheb",
+    "Klatovy", "Kolín", "Náchod", "Nový Jičín", "Písek", "Semily", "Sokolov", "Tábor"
+]
+
+romania_cities = [
+    "Bucharest", "Cluj-Napoca", "Timișoara", "Iași", "Constanța", "Craiova", "Brașov",
+    "Galați", "Ploiești", "Oradea", "Brăila", "Arad", "Pitești", "Sibiu", "Bacău",
+    "Târgu Mureș", "Baia Mare", "Buzău", "Satu Mare", "Râmnicu Vâlcea", "Drobeta-Turnu Severin",
+    "Suceava", "Piatra Neamț", "Târgu Jiu", "Botoșani", "Slobozia", "Reșița", "Alba Iulia",
+    "Hunedoara", "Deva", "Zalău", "Bistrița", "Focșani", "Tulcea", "Târgoviște", "Miercurea Ciuc",
+    "Alexandria", "Călărași", "Giurgiu", "Roman", "Huși", "Vaslui", "Sighetu Marmației"
+]
+
+hungary_cities = [
+    "Budapest", "Debrecen", "Szeged", "Miskolc", "Pécs", "Győr", "Nyíregyháza",
+    "Kecskemét", "Székesfehérvár", "Szombathely", "Tatabánya", "Érd", "Veszprém",
+    "Békéscsaba", "Zalaegerszeg", "Sopron", "Eger", "Nagykanizsa", "Dunaújváros",
+    "Cegléd", "Kaposvár", "Szolnok", "Hódmezővásárhely", "Kiskunhalas", "Salgótarján",
+    "Baja", "Vác", "Gyula", "Komárom", "Tata", "Keszthely", "Szekszárd", "Ajka",
+    "Mosonmagyaróvár", "Békés", "Borsodszirák", "Csorna", "Dunakeszi", "Hatvan", "Kalocsa"
+]
+
+vietnam_cities = [
+    "Ho Chi Minh City", "Hanoi", "Da Nang", "Hai Phong", "Can Tho", "Bien Hoa",
+    "Nha Trang", "Hue", "Vung Tau", "Nam Dinh", "Quy Nhon", "Thanh Hoa", "Viet Tri",
+    "Rach Gia", "Long Xuyen", "Thai Nguyen", "Ha Long", "Bac Giang", "Vinh", "Bac Ninh",
+    "Phan Thiet", "Tuy Hoa", "Cam Ranh", "Lang Son", "Dien Bien Phu", "Son La", "Hoa Binh",
+    "Ha Giang", "Cao Bang", "Tuyen Quang", "Lao Cai", "Yen Bai", "Phu Tho", "Quang Ngai",
+    "Dak Lak", "Kon Tum", "Gia Lai", "Dong Hoi", "Ha Tinh", "Quang Tri", "Ben Tre", "Tra Vinh"
+]
+
+colombia_cities = [
+    "Bogotá", "Medellín", "Cali", "Barranquilla", "Cartagena", "Cúcuta", "Soledad",
+    "Ibagué", "Bucaramanga", "Santa Marta", "Villavicencio", "Bello", "Pasto", "Manizales",
+    "Neiva", "Pereira", "Buenaventura", "Valledupar", "Montería", "Sincelejo", "Armenia",
+    "Popayán", "Tuluá", "Barrancabermeja", "Dosquebradas", "Riohacha", "Duitama", "Tunja",
+    "Girardot", "Florencia", "Maicao", "Yopal", "Apartadó", "Turbo", "Facatativá", "Zipaquirá",
+    "Soacha", "Ciénaga", "Envigado", "Itagüí", "Palmira", "Jamundí", "Florida", "Tumaco"
+]
+
+chile_cities = [
+    "Santiago", "Puente Alto", "Antofagasta", "Viña del Mar", "Valparaíso", "Talcahuano",
+    "San Bernardo", "Temuco", "Concepción", "Rancagua", "La Serena", "Coquimbo", "Talca",
+    "Arica", "Chillán", "Iquique", "Los Ángeles", "Puerto Montt", "Calama", "Osorno",
+    "Copiapó", "Quilpué", "Curicó", "Valdivia", "Punta Arenas", "Villarrica", "Ancud",
+    "Castro", "Angol", "Coyhaique", "Linares", "San Antonio", "San Felipe", "Rengo",
+    "Pichilemu", "Illapel", "Vallenar", "Victoria", "Pucón", "Chiguayante", "Coronel"
+]
+
+greece_cities = [
+    "Athens", "Thessaloniki", "Patras", "Heraklion", "Larissa", "Volos", "Rhodes",
+    "Ioannina", "Chania", "Kavala", "Serres", "Alexandroupoli", "Kozani", "Katerini",
+    "Tripoli", "Mytilene", "Komotini", "Xanthi", "Corfu", "Kalamata", "Argostoli",
+    "Sparta", "Pyrgos", "Veria", "Lamia", "Karditsa", "Preveza", "Nafplio", "Chalcis",
+    "Eleusis", "Livadeia", "Amfissa", "Karpenisi", "Messolonghi", "Zakynthos", "Kastoria",
+    "Arta", "Kilkis", "Florina", "Drama", "Edessa", "Veroia", "Aigion", "Kalamata"
+]
+
+portugal_cities = [
+    "Lisbon", "Porto", "Vila Nova de Gaia", "Amadora", "Braga", "Setúbal", "Coimbra",
+    "Funchal", "Queluz", "Agualva-Cacém", "Almada", "Aveiro", "Viseu", "Guimarães",
+    "Faro", "Leiria", "Cascais", "Évora", "Beja", "Guarda", "Bragança", "Portimão",
+    "Santarém", "Barreiro", "Loures", "Viana do Castelo", "Tomar", "Oliveira do Hospital",
+    "Caldas da Rainha", "Ponta Delgada", "Angra do Heroísmo", "Horta", "Vila Real",
+    "Chaves", "Miranda do Douro", "Torres Vedras", "Sintra", "Oeiras", "Matosinhos",
+    "Seixal", "Santa Maria da Feira", "Vila Franca de Xira", "Maia", "Gondomar"
+]
+
+ireland_cities = [
+    "Dublin", "Cork", "Limerick", "Galway", "Waterford", "Drogheda", "Swords", "Dundalk",
+    "Bray", "Navan", "Kilkenny", "Ennis", "Tralee", "Carlow", "Naas", "Athlone", "Letterkenny",
+    "Sligo", "Clonmel", "Wexford", "Trim", "Balbriggan", "Greystones", "Killarney", "Maynooth",
+    "Arklow", "Cobh", "Dungarvan", "Midleton", "Ballina", "Castlebar", "Mullingar", "Tullamore",
+    "Clonakilty", "Carrick-on-Suir", "Thurles", "Bandon", "Youghal", "Ballyshannon", "Kinsale",
+    "Newbridge", "Kilrush", "Westport", "Buncrana", "Cavan", "Longford", "Monaghan", "Birr"
+]
+
+new_zealand_cities = [
+    "Auckland", "Wellington", "Christchurch", "Hamilton", "Tauranga", "Dunedin", "Lower Hutt",
+    "Palmerston North", "Napier", "Rotorua", "New Plymouth", "Whangārei", "Invercargill",
+    "Nelson", "Gisborne", "Porirua", "Upper Hutt", "Whanganui", "Timaru", "Hastings",
+    "Levin", "Greymouth", "Queenstown", "Taupō", "Kapiti Coast", "Masterton", "Wanaka",
+    "Ashburton", "Cromwell", "Oamaru", "Te Awamutu", "Cambridge", "Pukekohe", "Warkworth",
+    "Havelock North", "Feilding", "Kerikeri", "Ōtaki", "Picton", "Blenheim", "Kaikōura",
+    "Wairoa", "Motueka", "Thames", "Waitakere", "Papakura", "Pukekohe East"
+]
+
+
+# Define city lists for each country (continued)
+
+ukraine_cities = [
+    "Kyiv", "Kharkiv", "Lviv", "Odesa", "Dnipro", "Donetsk", "Zaporizhzhia",
+    "Mykolaiv", "Mariupol", "Luhansk", "Vinnytsia", "Simferopol", "Chernihiv",
+    "Kherson", "Poltava", "Cherkasy", "Sumy", "Zhytomyr", "Kropyvnytskyi",
+    "Ternopil", "Ivano-Frankivsk", "Rivne", "Kremenchuk", "Lutsk", "Bila Tserkva",
+    "Kramatorsk", "Melitopol", "Kerch", "Sevastopol", "Uzhhorod", "Brovary",
+    "Chernivtsi", "Kamianske", "Mukachevo", "Khmelnytskyi", "Chornomorsk", "Nikopol",
+    "Sloviansk", "Berdyansk", "Pavlohrad", "Sievierodonetsk", "Kovel", "Yalta",
+    "Kostiantynivka", "Irpin", "Fastiv", "Boryspil", "Kryvyi Rih", "Horlivka"
+]
+
+slovakia_cities = [
+    "Bratislava", "Košice", "Prešov", "Žilina", "Nitra", "Banská Bystrica",
+    "Trnava", "Martin", "Trenčín", "Poprad", "Prievidza", "Zvolen", "Michalovce",
+    "Lučenec", "Nové Zámky", "Spišská Nová Ves", "Humenné", "Levice", "Komárno",
+    "Bardejov", "Kežmarok", "Snina", "Rožňava", "Vranov nad Topľou", "Šaľa",
+    "Dunajská Streda", "Hlohovec", "Piešťany", "Topoľčany", "Galanta", "Senica",
+    "Malacky", "Modra", "Sereď", "Skalica", "Veľký Krtíš", "Krupina", "Revúca",
+    "Rimavská Sobota", "Trebišov", "Sabinov", "Bytča", "Čadca", "Detva", "Dubnica nad Váhom"
+]
+
+bulgaria_cities = [
+    "Sofia", "Plovdiv", "Varna", "Burgas", "Ruse", "Stara Zagora", "Pleven",
+    "Sliven", "Dobrich", "Shumen", "Pernik", "Haskovo", "Yambol", "Vratsa",
+    "Gabrovo", "Veliko Tarnovo", "Vidin", "Montana", "Lovech", "Blagoevgrad",
+    "Razgrad", "Silistra", "Targovishte", "Asenovgrad", "Kardzhali", "Kyustendil",
+    "Dupnitsa", "Smolyan", "Petrich", "Sandanski", "Sevlievo", "Karlovo", "Kazanlak",
+    "Nova Zagora", "Aytos", "Peshtera", "Gotse Delchev", "Svishtov", "Provadia",
+    "Mezdra", "Panagyurishte", "Koprivshtitsa", "Tryavna", "Samokov", "Kula", "Beloslav"
+]
+
+estonia_cities = [
+    "Tallinn", "Tartu", "Narva", "Pärnu", "Kohtla-Järve", "Viljandi", "Rakvere",
+    "Maardu", "Sillamäe", "Võru", "Valga", "Haapsalu", "Jõhvi", "Paide", "Keila",
+    "Narva-Jõesuu", "Põlva", "Saue", "Kiviõli", "Kuressaare", "Elva", "Rapla",
+    "Tapa", "Kehra", "Paldiski", "Kunda", "Mustvee", "Türi", "Kilingi-Nõmme",
+    "Otepää", "Abja-Paluoja", "Antsla", "Jõgeva", "Kanepi", "Kastre", "Kohila",
+    "Kose", "Kärdla", "Lääneranna", "Lihula", "Loksa", "Lutsen", "Mõisaküla"
+]
+
+latvia_cities = [
+    "Riga", "Daugavpils", "Liepāja", "Jelgava", "Ventspils", "Jūrmala", "Valmiera",
+    "Rezekne", "Cēsis", "Salaspils", "Talsi", "Alūksne", "Balvi", "Bauska", "Dobele",
+    "Gulbene", "Jekabpils", "Kraslava", "Kuldīga", "Ludza", "Madona", "Ogre", "Preili",
+    "Saldus", "Smiltene", "Tukums", "Valka", "Viesīte", "Aizkraukle", "Aizpute", "Balozi",
+    "Brocēni", "Durbe", "Grobiņa", "Iecava", "Ikšķile", "Inčukalns", "Jaunjelgava",
+    "Kandava", "Kegums", "Ķekava", "Krāslava", "Lielvārde", "Limbaži", "Līvāni"
+]
+
+lithuania_cities = [
+    "Vilnius", "Kaunas", "Klaipėda", "Šiauliai", "Panevėžys", "Alytus", "Marijampolė",
+    "Mažeikiai", "Jonava", "Utena", "Kėdainiai", "Telšiai", "Visaginas", "Tauragė",
+    "Ukmergė", "Plungė", "Šalčininkai", "Palanga", "Druskininkai", "Elektrėnai",
+    "Kretinga", "Radviliškis", "Kalvarija", "Varėna", "Ignalina", "Zarasai", "Biržai",
+    "Jurbarkas", "Neringa", "Kelmė", "Rietavas", "Rokiškis", "Šakiai", "Širvintos",
+    "Trakai", "Vilkaviškis", "Zaraysk", "Anykščiai", "Birštonas", "Kazlų Rūda",
+    "Lentvaris", "Molėtai", "Pakruojis", "Pasvalys", "Prienai", "Raseiniai", "Skuodas"
+]
+
+slovenia_cities = [
+    "Ljubljana", "Maribor", "Celje", "Kranj", "Velenje", "Koper", "Novo Mesto",
+    "Ptuj", "Jesenice", "Trbovlje", "Kamnik", "Nova Gorica", "Murska Sobota",
+    "Slovenske Konjice", "Domžale", "Radovljica", "Sežana", "Idrija", "Radlje ob Dravi",
+    "Litija", "Postojna", "Brežice", "Kranjska Gora", "Izola", "Portorož", "Ribnica",
+    "Kobarid", "Bled", "Bohinj", "Vipava", "Trzin", "Škofja Loka", "Grosuplje",
+    "Komen", "Logatec", "Tolmin", "Žalec", "Črna na Koroškem", "Ajdovščina", "Kočevje",
+    "Metlika", "Ormož", "Ravne na Koroškem", "Semic", "Sodražica", "Šentjernej"
+]
+

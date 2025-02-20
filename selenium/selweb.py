@@ -10,21 +10,18 @@ import re
 import pandas as pd
 import requests
 from requests.exceptions import RequestException
+from extractfromtxt import extract_cities
 
+
+cities = extract_cities("Classification.txt")
 # Precompile regex patterns for efficiency
 PHONE_REGEX = re.compile(r'([0-9\+\-\(\) ]{8,})')
 EMAIL_REGEX = re.compile(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}')
 LINKEDIN_REGEX = re.compile(r'https?://(?:www\.)?linkedin\.com/[^\s"\']+')
 
 # List of Belgium cities
-belgium_cities = [
-    "Brussels", "Antwerp", "Ghent", "Charleroi", "Liège", "Bruges", "Namur",
-    "Leuven", "Mons", "Aalst", "Mechelen", "Ostend", "Tournai", "Hasselt",
-    "Sint-Niklaas", "Dendermonde", "Roeselare", "Kortrijk", "Genk", "Seraing",
-    "Turnhout", "Herstal", "Virton", "Verviers", "Maaseik", "Waremme", "Andenne",
-    "Thuin", "Enghien", "Bergen", "Sint-Truiden", "Diksmuide", "Blankenberge",
-    "La Louvière"
-]
+
+
 
 # Configure Chrome options for headless and efficiency
 chrome_options = webdriver.ChromeOptions()
@@ -78,84 +75,86 @@ def extract_contact_info(url):
 
 # List to collect all data
 all_data = []
-
-for city in belgium_cities:
-    try:
-        keyword = f"ecommerce {city}"
-        driver.get(f'https://www.google.com/maps/search/{keyword}/')
-
-        # Close initial popup if present
+for country, list in cities.items():
+    print("Exctracting data for {} ....".format(country))
+    for city in list:
+        print("Exctracting data {} city of {} ....".format(country, city))
         try:
-            WebDriverWait(driver, 3).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, "form:nth-child(2)"))
-            ).click()
-        except Exception:
-            pass
+            keyword = f"ecommerce {city}"
+            driver.get(f'https://www.google.com/maps/search/{keyword}/')
 
-        scroll_feed(driver)
-
-        items = driver.find_elements(By.CSS_SELECTOR, 'div[role="feed"] > div > div[jsaction]')
-        for item in items:
-            data = {'City': city}
-
-            # Extract title and link
+            # Close initial popup if present
             try:
-                data['title'] = item.find_element(By.CSS_SELECTOR, ".fontHeadlineSmall").text
-                data['link'] = item.find_element(By.CSS_SELECTOR, "a").get_attribute('href')
+                WebDriverWait(driver, 3).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, "form:nth-child(2)"))
+                ).click()
             except Exception:
-                continue  # Skip if no title
+                pass
 
-            # Extract website
-            try:
-                data['website'] = item.find_element(By.CSS_SELECTOR, 'div[role="feed"] > div > div[jsaction] div > a').get_attribute('href')
-            except Exception:
-                data['website'] = None
+            scroll_feed(driver)
 
-            # Extract rating and reviews
-            try:
-                rating_text = item.find_element(By.CSS_SELECTOR, '.fontBodyMedium > span[role="img"]').get_attribute('aria-label')
-                numbers = [float(piece.replace(",", ".")) for piece in rating_text.split() 
-                         if piece.replace(",", ".").replace(".", "", 1).isdigit()]
-                data['stars'] = numbers[0] if numbers else None
-                data['reviews'] = int(numbers[1]) if len(numbers) > 1 else None
-            except Exception:
-                data['stars'] = data['reviews'] = None
+            items = driver.find_elements(By.CSS_SELECTOR, 'div[role="feed"] > div > div[jsaction]')
+            for item in items:
+                data = {'City': city}
 
-            # Extract phone number
-            try:
-                text_content = item.text
-                phone_match = PHONE_REGEX.search(text_content)
-                data['phone'] = phone_match.group(0) if phone_match else None
-            except Exception:
-                data['phone'] = None
+                # Extract title and link
+                try:
+                    data['title'] = item.find_element(By.CSS_SELECTOR, ".fontHeadlineSmall").text
+                    data['link'] = item.find_element(By.CSS_SELECTOR, "a").get_attribute('href')
+                except Exception:
+                    continue  # Skip if no title
 
-            # Extract email and LinkedIn
-            data['email'], data['linkedin'] = extract_contact_info(data['website']) if data['website'] else (None, None)
+                # Extract website
+                try:
+                    data['website'] = item.find_element(By.CSS_SELECTOR, 'div[role="feed"] > div > div[jsaction] div > a').get_attribute('href')
+                except Exception:
+                    data['website'] = None
 
-            # Append cleaned data
-            all_data.append({
-                'Company Name': data['title'],
-                'Contact Name': '',
-                'Email': data['email'],
-                'Job Position': '',
-                'Mobile': data['phone'],
-                'Website': data['website'],
-                'LinkedIn': data['linkedin'],
-                'City': city
-            })
+                # Extract rating and reviews
+                try:
+                    rating_text = item.find_element(By.CSS_SELECTOR, '.fontBodyMedium > span[role="img"]').get_attribute('aria-label')
+                    numbers = [float(piece.replace(",", ".")) for piece in rating_text.split() 
+                            if piece.replace(",", ".").replace(".", "", 1).isdigit()]
+                    data['stars'] = numbers[0] if numbers else None
+                    data['reviews'] = int(numbers[1]) if len(numbers) > 1 else None
+                except Exception:
+                    data['stars'] = data['reviews'] = None
 
-        print(f"Processed {city} with {len(items)} entries.")
+                # Extract phone number
+                try:
+                    text_content = item.text
+                    phone_match = PHONE_REGEX.search(text_content)
+                    data['phone'] = phone_match.group(0) if phone_match else None
+                except Exception:
+                    data['phone'] = None
 
-    except Exception as e:
-        print(f"Error processing {city}: {e}")
+                # Extract email and LinkedIn
+                data['email'], data['linkedin'] = extract_contact_info(data['website']) if data['website'] else (None, None)
 
-# Save all data to Excel
-if all_data:
-    df = pd.DataFrame(all_data)
-    with pd.ExcelWriter('resultsbelgium.xlsx') as writer:
-        df.to_excel(writer, index=False, sheet_name='All Cities')
-    print("Data saved to 'resultsbelgium.xlsx'.")
-else:
-    print("No data collected.")
+                # Append cleaned data
+                all_data.append({
+                    'Company Name': data['title'],
+                    'Contact Name': '',
+                    'Email': data['email'],
+                    'Job Position': '',
+                    'Mobile': data['phone'],
+                    'Website': data['website'],
+                    'LinkedIn': data['linkedin'],
+                    'City': city
+                })
+
+            print(f"Processed {city} with {len(items)} entries.")
+
+        except Exception as e:
+            print(f"Error processing {city}: {e}")
+
+    # Save all data to Excel
+    if all_data:
+        df = pd.DataFrame(all_data)
+        with pd.ExcelWriter('resultsALL.xlsx') as writer:
+            df.to_excel(writer, index=False, sheet_name=str(country))
+        print("Data saved to 'resultsbelgium.xlsx'.")
+    else:
+        print("No data collected.")
 
 driver.quit()

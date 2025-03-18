@@ -14,8 +14,52 @@ from extractfromtxt import extract_cities
 
 # Extract cities from text file and filter completed countries
 cities = extract_cities("Classification.txt")
-completed = ['Belgium', 'United States', 'Germany', 'United Kingdom', 'Japan', 'India', 'France', 'Brazil', 'Canada', 'Australia', 'South Korea', 'Russia', 'Italy', 'Spain']
-# Assuming cities is a dictionary mapping country to list of cities:
+completed = [
+    "belgium_cities",
+    "us_cities",
+    "germany_cities",
+    "uk_cities",
+    "japan_cities",
+    "india_cities",
+    "france_cities",
+    "brazil_cities",
+    "canada_cities",
+    "australia_cities",
+    "south_korea_cities",
+    "russia_cities",
+    "italy_cities",
+    "spain_cities",
+    "mexico_cities",
+    "indonesia_cities",
+    "netherlands_cities",
+    "turkey_cities",
+    "saudi_arabia_cities",
+    "sweden_cities",
+    "switzerland_cities",
+    "norway_cities",
+    "austria_cities",
+    "denmark_cities",
+    "finland_cities",
+    "singapore_cities",
+    "malaysia_cities",
+    "thailand_cities",
+    "philippines_cities",
+    "south_africa_cities",
+    "nigeria_cities",
+    "israel_cities",
+    "poland_cities",
+    "czech_republic_cities",
+    "romania_cities",
+    "hungary_cities",
+    "vietnam_cities",
+    "colombia_cities",
+    "chile_cities",
+    "greece_cities",
+    "portugal_cities",
+    "ireland_cities"
+]
+
+
 NewCountry = {country: cities_list for country, cities_list in cities.items() if country not in completed}
 
 # Precompile regex patterns for efficiency
